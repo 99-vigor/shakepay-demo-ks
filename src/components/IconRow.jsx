@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { COLORS } from '../constants'
-import { formatCurrencyAmount } from '../helpers'
 
 const Wrapper = styled.div`
     display: flex;
@@ -28,21 +27,17 @@ const SubtextGroup = styled.div`
 
 `
 
-export const CurrencyRow = ({ name, icon, balance, effBalance, rate, currency = '$' }) => {
+export const IconRow = ({ name, icon, leftMain, leftSub, rightMain, rightSub }) => {
     return (
         <Wrapper>
-            <img src={icon} className='currency-logo'/>
+            <img src={icon} className='currency-logo' />
             <SubtextGroup className='currency-name'>
-                <div className='subtextgroup-main'>{name}</div>
-                <div className='subtextgroup-sub'>
-                    {effBalance && formatCurrencyAmount({ amount: effBalance, currency })}
-                </div>
+                <div className='subtextgroup-main'>{leftMain}</div>
+                <div className='subtextgroup-sub'>{leftSub}</div>
             </SubtextGroup>
             <SubtextGroup className='currency-amount'>
-                <div className='subtextgroup-main'>{balance && balance.toLocaleString()}</div>
-                <div className='subtextgroup-sub'>
-                    {rate && formatCurrencyAmount({ amount: rate, currency })}
-                </div>
+                <div className='subtextgroup-main'>{rightMain}</div>
+                <div className='subtextgroup-sub'>{rightSub}</div>
             </SubtextGroup>
         </Wrapper>
     )
