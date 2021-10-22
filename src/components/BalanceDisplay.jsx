@@ -28,9 +28,9 @@ const Wrapper = styled.div`
 
 export const BalanceDisplay = ({ balance, currency='$' }) => {
     return (
-        <Wrapper>
+        <Wrapper className='balance-display'>
             <div className='balance-display-logo'>
-                <img src={mainLogo} className='balance-display-logo-img' />
+                <img src={mainLogo} className='balance-display-logo-img'  width='80px'/>
             </div>
             <div className='balance-display-amount'>
                 <span className='balance-display-amount-currency'>{currency}</span>

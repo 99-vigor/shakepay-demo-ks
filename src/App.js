@@ -1,19 +1,21 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import logo from './logo.svg';
 import bitcoinLogo from './images/currency btc.svg'
 import ethereumLogo from './images/currency eth.svg'
 import cadLogo from './images/currency cad.svg'
 import './App.css';
 import { CurrencyRow } from './components/CurrencyRow';
 import { BalanceDisplay } from './components/BalanceDisplay';
+import { COLORS } from './constants';
 
-const COLORS = {
-  white: '#FFF'
-}
 const Background = styled.div`
   background-color: ${COLORS.white};
   padding: 2em;
+  display: flex;
+  flex-direction: column;
+  .balance-display {
+    margin: 0em auto 2em auto;
+  }
 `
 
 const rows = [
@@ -43,11 +45,9 @@ function App() {
   const [totalBalance, setTotalBalance] = useState(8844.42)
   return (
     <Background>
+      <BalanceDisplay balance={totalBalance}/>
       <div>
-        <BalanceDisplay balance={totalBalance}/>
-        <div>
-          { rows.map(row => <CurrencyRow {...row}/>)}
-        </div>
+        { rows.map(row => <CurrencyRow {...row}/>)}
       </div>
     </Background>
   );
