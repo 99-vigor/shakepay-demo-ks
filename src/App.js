@@ -1,21 +1,20 @@
 import { useState } from 'react'
-import styled from 'styled-components'
 import bitcoinLogo from './images/currency btc.svg'
 import ethereumLogo from './images/currency eth.svg'
 import cadLogo from './images/currency cad.svg'
 import './App.css';
-import { CurrencyRow } from './components/IconRow';
-import { BalanceDisplay } from './components/BalanceDisplay';
-import { COLORS } from './constants';
 import { HomeScreen } from './components/HomeScreen'
+import { WalletScreen } from './components/WalletScreen';
 
 const balanceData = [
   {
+    id: 'CAD',
     name: 'Dollars',
     icon: cadLogo,
     balance: 1856.34,
   },
   {
+    id: 'BTC',
     name: 'Bitcoin',
     icon: bitcoinLogo,
     balance: 0.4946,
@@ -23,6 +22,7 @@ const balanceData = [
     rate: 6187.99
   },
   {
+    id: 'ETH',
     name: 'Ethereum',
     icon: ethereumLogo,
     balance: 2.9429,
@@ -31,12 +31,41 @@ const balanceData = [
   }
 ]
 
+const VIEWS = {
+  home: 'VIEWS_HOME',
+  wallet: 'VIEWS_WALLET'
+}
 
 function App() {
   const [totalBalance, setTotalBalance] = useState(8844.42)
-  return (
-    <HomeScreen totalBalance={totalBalance} balanceData={balanceData}/>
-  );
+  const [view, setView] = useState(VIEWS.home)
+  const [transactionCurrency, setTransactionCurrency] = useState(null)
+
+  const handleCurrencyRowClick = id => () => {
+    setView(VIEWS.wallet)
+    setTransactionCurrency(id)
+  }
+  const handleWalletBackClick = () => {
+    setView(VIEWS.home)
+  }
+
+  switch(view) {
+    case VIEWS.wallet:
+      return (
+        <WalletScreen
+          currency={transactionCurrency}
+          onBackClick={handleWalletBackClick}
+        />
+      )
+    default:
+      return (
+        <HomeScreen
+          totalBalance={totalBalance}
+          balanceData={balanceData}
+          onRowClick={handleCurrencyRowClick}
+        />
+      )
+  }
 }
 
 export default App;

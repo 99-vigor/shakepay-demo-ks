@@ -3,7 +3,7 @@ import { COLORS } from '../constants'
 
 const Wrapper = styled.div`
     display: flex;
-    border: 1px solid black;
+    cursor: pointer;
     .currency-logo {
         margin-right: 1em;
     }
@@ -27,9 +27,9 @@ const SubtextGroup = styled.div`
 
 `
 
-export const IconRow = ({ name, icon, leftMain, leftSub, rightMain, rightSub }) => {
+export const IconRow = ({ icon, leftMain, leftSub, rightMain, rightSub, onClick }) => {
     return (
-        <Wrapper>
+        <Wrapper onClick={onClick}>
             <img src={icon} className='currency-logo' />
             <SubtextGroup className='currency-name'>
                 <div className='subtextgroup-main'>{leftMain}</div>

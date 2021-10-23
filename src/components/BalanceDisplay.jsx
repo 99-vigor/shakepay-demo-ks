@@ -3,7 +3,6 @@ import styled from "styled-components"
 import mainLogo from '../images/logo.svg'
 
 const Wrapper = styled.div`
-    border: 1px solid black;
     width: min-content;
     .balance-display-logo {
         display: flex;

@@ -15,27 +15,32 @@ const Background = styled.div`
 `
 
 const formatBalance = ({
+    id,
     name,
     icon,
     balance,
     effBalance,
-    rate
+    rate,
+    onRowClick
 }) => {
     return {
         icon,
         leftMain: name,
         leftSub: effBalance ? formatCurrencyAmount({ amount: effBalance }) : undefined,
         rightMain: balance,
-        rightSub: rate ? formatCurrencyAmount({ amount: rate }) : undefined
+        rightSub: rate ? formatCurrencyAmount({ amount: rate }) : undefined,
+        onClick: onRowClick(id)
     }
 }
 
-export const HomeScreen = ({ totalBalance, balanceData }) => {
+export const HomeScreen = ({ totalBalance, balanceData, onRowClick }) => {
     return (
         <Background>
             <BalanceDisplay balance={totalBalance} />
             <div>
-                {balanceData.map(balance => <IconRow {...formatBalance(balance)} />)}
+                {balanceData.map(balance => 
+                    <IconRow {...formatBalance({...balance, onRowClick})} />
+                )}
             </div>
         </Background>
     )
